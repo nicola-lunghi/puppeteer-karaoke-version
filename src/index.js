@@ -132,7 +132,12 @@ let trackNames = await page.$$(".mixer .track .track__caption");
 
 let i = 1;
 let downloadButton = await page.waitForSelector("a.download");
+let resetButton = await page.waitForSelector("button.mixer__reset[title='Reset']");
 for (const soloButton of soloButtons) {
+  console.log('Track Reset')
+  await resetButton.click();
+  await util.sleep(2000);
+
   // the click track also has the intro element, so we need to extract just the text
   const trackName = await trackNames[i - 1].evaluate((el) =>
     el.lastChild.nodeValue.trim()
@@ -140,6 +145,7 @@ for (const soloButton of soloButtons) {
   console.log(`soloing track ${i} of ${soloButtons.length} (${trackName})`);
   await soloButton.click();
   await util.sleep(3000);
+
   await downloadButton.click();
   console.log("Waiting for download...");
   await util.sleep(3000);
