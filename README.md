@@ -37,6 +37,7 @@ Then run `npm run start <song url>`.
 
 - `-d <path>` Change the download location
 - `-h` or `--headless` Use headless mode, which hides the UI.
+- `-i` or `--intro` Include the intro precount
 - `-s` or `--subfolder` create a subfolder in download.
 - `-p <pitch offset>` Change the pitch of the downloaded tracks:
   - `-1` to go down half step
@@ -66,6 +67,7 @@ And Karaoke Version, if you're listening: We'd love if this was fully supported 
 ## master/unreleased
 
 - Added `-s` option to add a subfolder
+- Added `-i` option to set the intro field
 
 ## 0.2
 

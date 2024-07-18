@@ -32,6 +32,7 @@ if (!songUrl) {
 let subf = args.includes("-s") || args.includes("--subfolder");
 let headless = args.includes("-h") || args.includes("--headless");
 let pitch = parseInt(util.getArgValue(args, "-p"));
+let intro = args.includes("-i") || args.includes("--intro");
 
 // Get base download path
 let downloadPath = util.getArgValue(args, "-d");
@@ -113,6 +114,15 @@ if (!Number.isNaN(pitch)) {
     // need to reload after pitching
     (await page.waitForSelector("a#pitch-link")).click();
     await util.sleep(4000);
+  }
+}
+
+// Handling the 'precount' checkbox if intro is enabled
+if (intro) {
+  const precountCheckbox = await page.waitForSelector("input#precount");
+  const isChecked = await precountCheckbox.evaluate(el => el.checked);
+  if (!isChecked) {
+    await precountCheckbox.evaluate(el => el.click());
   }
 }
 
